@@ -34,7 +34,7 @@ require __DIR__ . '/../partials/header.php';
             <a class="btn secondary" href="<?= $BASE_URL ?>/admin/event/edit?id=<?= (int)$e['id'] ?>">Edit</a>
             <a class="btn secondary" href="<?= $BASE_URL ?>/admin/reservations?event_id=<?= (int)$e['id'] ?>">Reservations</a>
 
-            <form method="POST" action="<?= $BASE_URL ?>/admin/event/delete" onsubmit="return confirm('Delete this event?');">
+            <form class="delete-form" method="POST" action="<?= $BASE_URL ?>/admin/event/delete">
               <input type="hidden" name="id" value="<?= (int)$e['id'] ?>">
               <button class="btn danger" type="submit">Delete</button>
             </form>

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Handle delete confirmation
-    const deleteForms = document.querySelectorAll('form[action*="delete"]');
+    const deleteForms = document.querySelectorAll('.delete-form');
     deleteForms.forEach(function(form) {
         form.addEventListener('submit', function(e) {
             const confirmed = confirm('Are you sure you want to delete this item? This action cannot be undone.');
