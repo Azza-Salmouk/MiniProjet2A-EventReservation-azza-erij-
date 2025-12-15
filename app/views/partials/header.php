@@ -1,6 +1,19 @@
 <?php
 // Base URL (pour que les liens et css marchent même si le projet est dans /.../public)
-$BASE_URL = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+// More robust BASE_URL calculation for Windows and preview files
+$scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+$baseUrl = str_replace('\\', '/', dirname($scriptName));
+// For preview files in public directory, we need to go up one level
+if (strpos($scriptName, '/preview_') !== false) {
+    $BASE_URL = rtrim($baseUrl, '/');
+} else {
+    $BASE_URL = rtrim($baseUrl, '/');
+}
+// Ensure we don't have '.' or '/' as base URL
+if ($BASE_URL === '.' || $BASE_URL === '/') {
+    $BASE_URL = '';
+}
+
 $pageTitle = $pageTitle ?? "MiniEvent";
 $isAdminPage = $isAdminPage ?? false;
 ?>
@@ -13,7 +26,7 @@ $isAdminPage = $isAdminPage ?? false;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?= $BASE_URL ?>/css/style.css?v=1">
+  <link rel="stylesheet" href="<?= $BASE_URL ?>/css/style.css?v=<?= filemtime(__DIR__ . '/../../../public/css/style.css') ?>">
 </head>
 <body>
   <header class="topbar">

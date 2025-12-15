@@ -6,6 +6,6 @@
     </div>
   </footer>
 
-  <script src="<?= $BASE_URL ?>/js/app.js?v=1"></script>
+  <script src="<?= $BASE_URL ?>/js/app.js?v=<?= filemtime(__DIR__ . '/../../../public/js/app.js') ?>"></script>
 </body>
 </html>
