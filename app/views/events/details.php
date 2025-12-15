@@ -33,23 +33,23 @@ require __DIR__ . '/../partials/header.php';
     <div class="alert success"><?= htmlspecialchars($success) ?></div>
   <?php endif; ?>
 
-  <form class="card form" method="POST" action="<?= $BASE_URL ?>/reserve">
-    <input type="hidden" name="event_id" value="<?= (int)$event['id'] ?>">
-
+  <form class="card form js-reserve-form" method="POST" action="<?= $BASE_URL ?>/reserve">
     <div>
       <label>Your name</label>
-      <input class="input" name="name" required>
+      <input class="input" name="name" required minlength="2" maxlength="60" placeholder="Your full name">
     </div>
 
     <div>
       <label>Email</label>
-      <input class="input" type="email" name="email" required>
+      <input class="input" type="email" name="email" required placeholder="example@mail.com">
     </div>
 
     <div>
       <label>Phone</label>
-      <input class="input" name="phone" required>
+      <input class="input" name="phone" required minlength="6" maxlength="20" placeholder="Phone number">
     </div>
+
+    <input type="hidden" name="event_id" value="<?= (int)$event['id'] ?>">
 
     <button class="btn" type="submit">Confirm reservation</button>
     <a class="btn secondary" href="<?= $BASE_URL ?>/">Back</a>

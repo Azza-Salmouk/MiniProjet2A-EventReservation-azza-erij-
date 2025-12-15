@@ -20,27 +20,27 @@ $action = $isEdit ? ($BASE_URL . "/admin/event/update") : ($BASE_URL . "/admin/e
 
   <div>
     <label>Title</label>
-    <input class="input" name="title" required value="<?= htmlspecialchars($event['title'] ?? '') ?>">
+    <input class="input" name="title" required value="<?= htmlspecialchars($event['title'] ?? '') ?>" placeholder="Event title">
   </div>
 
   <div>
     <label>Description</label>
-    <textarea class="input" name="description" rows="5" required><?= htmlspecialchars($event['description'] ?? '') ?></textarea>
+    <textarea class="input" name="description" rows="5" required placeholder="Event description"><?= htmlspecialchars($event['description'] ?? '') ?></textarea>
   </div>
 
   <div>
     <label>Date (YYYY-MM-DD HH:MM:SS)</label>
-    <input class="input" name="event_date" required value="<?= htmlspecialchars($event['event_date'] ?? '') ?>">
+    <input class="input" name="event_date" required value="<?= htmlspecialchars($event['event_date'] ?? '') ?>" placeholder="YYYY-MM-DD HH:MM:SS">
   </div>
 
   <div>
     <label>Location</label>
-    <input class="input" name="location" required value="<?= htmlspecialchars($event['location'] ?? '') ?>">
+    <input class="input" name="location" required value="<?= htmlspecialchars($event['location'] ?? '') ?>" placeholder="Event location">
   </div>
 
   <div>
     <label>Seats</label>
-    <input class="input" type="number" min="0" name="seats" required value="<?= htmlspecialchars((string)($event['seats'] ?? '')) ?>">
+    <input class="input" type="number" min="0" name="seats" required value="<?= htmlspecialchars((string)($event['seats'] ?? '')) ?>" placeholder="Number of seats">
   </div>
 
   <div>
