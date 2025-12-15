@@ -27,7 +27,17 @@ require __DIR__ . '/../partials/header.php';
           <?php if (!empty($e['image'])): ?>
             <img src="<?= $BASE_URL ?>/uploads/<?= htmlspecialchars($e['image']) ?>" alt="<?= htmlspecialchars($e['title'] ?? '') ?>">
           <?php else: ?>
-            <img src="<?= $BASE_URL ?>/images/event-placeholder.svg" alt="Event placeholder">
+            <?php
+            // Map images based on event title
+            $eventTitle = $e['title'] ?? '';
+            $imageMap = [
+                'Tech Conference 2023' => $BASE_URL . '/images/tech.jpg',
+                'Art Exhibition Opening' => $BASE_URL . '/images/art.jpg',
+                'Music Festival' => $BASE_URL . '/images/music.jpg'
+            ];
+            $imageUrl = $imageMap[$eventTitle] ?? $BASE_URL . '/images/event-placeholder.svg';
+            ?>
+            <img src="<?= $imageUrl ?>" alt="<?= htmlspecialchars($eventTitle) ?>">
           <?php endif; ?>
           
           <h3 class="mt-0 mb-sm"><?= htmlspecialchars($e['title'] ?? '') ?></h3>
