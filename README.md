@@ -13,8 +13,8 @@ Application web de gestion de réservations d'événements développée en PHP (
 
 ## 👥 Équipe
 
-- **Azza** - Backend Developer
-- **Erij** - Frontend Developer
+- **Azza** 
+- **Erij** 
 
 ---
 
@@ -130,19 +130,7 @@ Accéder à : `http://localhost:8000/seed_admin.php`
 - Username : `admin`
 - Password : `admin123`
 
-⚠️ **Changez ce mot de passe en production !**
 
-### 4. Lancer le serveur
-
-**Option A** : Serveur PHP intégré (recommandé)
-```bash
-cd public
-php -S localhost:8000
-```
-
-**Option B** : Apache (XAMPP/WAMP)
-- Placer le projet dans `htdocs/`
-- Accéder à `http://localhost/MiniProjet2A-EventReservation-azza-erij-/public/`
 
 ---
 
@@ -207,7 +195,7 @@ Accéder aux URLs suivantes pour tester le backend :
 
 ## 📦 Livrables
 
-### Backend (Azza) ✅
+
 - [x] Models (Event, Reservation, Admin)
 - [x] Controllers (EventController, AdminController)
 - [x] Helpers (Validator, ImageUploader, Flash)
@@ -217,10 +205,7 @@ Accéder aux URLs suivantes pour tester le backend :
 - [x] Tests complets
 - [x] Documentation API
 
-### Frontend (Erij) 🚧
-- [ ] Vues HTML/CSS
-- [ ] Intégration avec backend
-- [ ] Design responsive
+
 
 ---
 
