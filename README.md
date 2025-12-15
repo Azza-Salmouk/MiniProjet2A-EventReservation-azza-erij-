@@ -131,6 +131,13 @@ Accéder à : `http://localhost:8000/seed_admin.php`
 - Username : `admin`
 - Password : `admin123`
 
+### 4. Lancer le serveur de développement
+
+Utiliser la commande suivante pour lancer le serveur PHP avec le routeur personnalisé :
+
+```bash
+php -S localhost:8000 -t public public/router.php
+```
 
 
 ---
@@ -172,26 +179,31 @@ Accéder aux URLs suivantes pour tester le backend :
 
 ---
 
-## 🌐 Routes Principales
+## 🌐 URLs à tester
 
-### Publiques
-- `GET /` → Liste des événements
-- `GET /event?id=X` → Détail événement
-- `POST /reserve` → Créer réservation
+Après avoir lancé le serveur avec `php -S localhost:8000 -t public public/router.php`, vous pouvez accéder aux URLs suivantes :
 
-### Admin (authentification requise)
-- `GET /admin/login` → Connexion
-- `GET /admin` → Dashboard
-- `GET /admin/event/new` → Créer événement
-- `POST /admin/event/create` → Sauvegarder événement
-- `GET /admin/event/edit?id=X` → Éditer événement
-- `POST /admin/event/update` → Mettre à jour
-- `POST /admin/event/delete` → Supprimer
-- `GET /admin/reservations?event_id=X` → Voir réservations
-- `GET /admin/logout` → Déconnexion
+### Pages publiques
+- `http://localhost:8000/` → Liste des événements
+- `http://localhost:8000/event?id=1` → Détail d'un événement
+- `http://localhost:8000/admin/login` → Connexion administrateur
 
-**Liste complète** : `http://localhost:8000/test_routes.php`
+### Pages admin (après authentification)
+- `http://localhost:8000/admin` → Dashboard
+- `http://localhost:8000/admin/event/new` → Créer un événement
+- `http://localhost:8000/admin/event/edit?id=1` → Éditer un événement
+- `http://localhost:8000/admin/reservations?event_id=1` → Voir les réservations
+- `http://localhost:8000/admin/logout` → Déconnexion
 
+### Pages de test sans backend (aperçu UI)
+- `http://localhost:8000/preview_list.php` → Aperçu liste des événements
+- `http://localhost:8000/preview_details.php` → Aperçu détail d'un événement
+- `http://localhost:8000/preview_admin_login.php` → Aperçu login admin
+- `http://localhost:8000/preview_admin_dashboard.php` → Aperçu dashboard admin
+- `http://localhost:8000/preview_admin_form_event.php` → Aperçu formulaire événement
+- `http://localhost:8000/preview_admin_reservations.php` → Aperçu réservations
+
+**Liste complète des routes** : `http://localhost:8000/test_routes.php`
 ---
 
 ## 📦 Livrables

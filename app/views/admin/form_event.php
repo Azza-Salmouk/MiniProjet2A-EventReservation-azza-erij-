@@ -4,7 +4,7 @@ $pageTitle = $isEdit ? "Edit Event" : "New Event";
 $isAdminPage = true;
 require __DIR__ . '/../partials/header.php';
 
-$action = $isEdit ? ($BASE_URL . "/admin/event/update") : ($BASE_URL . "/admin/event/create");
+$action = $isEdit ? "/admin/event/update" : "/admin/event/create";
 ?>
 
 <h1 class="text-center"><?= $isEdit ? "Edit Event" : "Create New Event" ?></h1>

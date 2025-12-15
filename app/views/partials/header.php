@@ -15,13 +15,13 @@ if ($BASE_URL === '.' || $BASE_URL === '/') {
 }
 
 // URL fallbacks for flexible routing
-$EVENTS_LIST_URL = $EVENTS_LIST_URL ?? $BASE_URL . "/";
-$EVENT_DETAILS_URL = $EVENT_DETAILS_URL ?? $BASE_URL . "/events/details";
-$ADMIN_LOGIN_URL = $ADMIN_LOGIN_URL ?? $BASE_URL . "/admin/login";
-$ADMIN_DASHBOARD_URL = $ADMIN_DASHBOARD_URL ?? $BASE_URL . "/admin";
-$ADMIN_RESERVATIONS_URL = $ADMIN_RESERVATIONS_URL ?? $BASE_URL . "/admin/reservations";
-$ADMIN_FORM_EVENT_URL = $ADMIN_FORM_EVENT_URL ?? $BASE_URL . "/admin/events/new";
-$ADMIN_LOGOUT_URL = $ADMIN_LOGOUT_URL ?? $BASE_URL . "/admin/logout";
+$EVENTS_LIST_URL = $EVENTS_LIST_URL ?? "/";
+$EVENT_DETAILS_URL = $EVENT_DETAILS_URL ?? "/event";
+$ADMIN_LOGIN_URL = $ADMIN_LOGIN_URL ?? "/admin/login";
+$ADMIN_DASHBOARD_URL = $ADMIN_DASHBOARD_URL ?? "/admin";
+$ADMIN_RESERVATIONS_URL = $ADMIN_RESERVATIONS_URL ?? "/admin/reservations";
+$ADMIN_FORM_EVENT_URL = $ADMIN_FORM_EVENT_URL ?? "/admin/event/new";
+$ADMIN_LOGOUT_URL = $ADMIN_LOGOUT_URL ?? "/admin/logout";
 
 // Determine current page for active link highlighting
 $currentScript = basename($_SERVER['SCRIPT_NAME']);
@@ -48,12 +48,12 @@ $layout = $layout ?? "public"; // "public" or "admin"
       <a class="brand" href="<?= $EVENTS_LIST_URL ?>">MiniEvent</a>
       <nav class="nav">
         <?php if ($layout === "admin"): ?>
-          <a href="<?= $ADMIN_DASHBOARD_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'dashboard') !== false ? 'active' : '' ?>">Dashboard</a>
+          <a href="<?= $ADMIN_DASHBOARD_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'admin') !== false && strpos($_SERVER['REQUEST_URI'], 'dashboard') !== false || $_SERVER['REQUEST_URI'] === '/admin' || $_SERVER['REQUEST_URI'] === '/admin/' ? 'active' : '' ?>">Dashboard</a>
           <a href="<?= $ADMIN_RESERVATIONS_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'reservations') !== false ? 'active' : '' ?>">Reservations</a>
-          <a href="<?= $ADMIN_FORM_EVENT_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'form_event') !== false ? 'active' : '' ?>">New Event</a>
+          <a href="<?= $ADMIN_FORM_EVENT_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'new') !== false || strpos($_SERVER['REQUEST_URI'], 'edit') !== false ? 'active' : '' ?>">New Event</a>
           <a href="<?= $ADMIN_LOGOUT_URL ?>" class="danger">Logout</a>
         <?php else: ?>
-          <a href="<?= $EVENTS_LIST_URL ?>" class="<?= $currentPage === 'preview_list' || $currentPage === 'list' ? 'active' : '' ?>">Events</a>
+          <a href="<?= $EVENTS_LIST_URL ?>" class="<?= $_SERVER['REQUEST_URI'] === '/' || $currentPage === 'preview_list' || $currentPage === 'list' ? 'active' : '' ?>">Events</a>
           <a href="<?= $ADMIN_LOGIN_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'login') !== false ? 'active' : '' ?>">Admin</a>
         <?php endif; ?>
       </nav>

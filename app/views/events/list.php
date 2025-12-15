@@ -50,7 +50,7 @@ require __DIR__ . '/../partials/header.php';
           
           <p class="text-muted small mb-lg"><?= htmlspecialchars(substr($e['description'] ?? '', 0, 100)) ?><?= strlen($e['description'] ?? '') > 100 ? '...' : '' ?></p>
           
-          <a href="<?= $BASE_URL ?>/event/<?= (int)$e['id'] ?>" class="btn secondary">View Details</a>
+          <a href="/event?id=<?= (int)$e['id'] ?>" class="btn secondary">View Details</a>
         </div>
       <?php endforeach; ?>
     </div>

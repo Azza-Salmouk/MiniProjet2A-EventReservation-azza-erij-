@@ -8,7 +8,7 @@ require __DIR__ . '/../partials/header.php';
   <div class="card text-center py-lg">
     <h3>Event not found</h3>
     <p class="text-muted">The event you're looking for doesn't exist or has been removed.</p>
-    <a href="<?= $BASE_URL ?>/" class="btn">Browse Events</a>
+    <a href="/" class="btn">Browse Events</a>
   </div>
 <?php else: ?>
   <div class="card">
@@ -55,7 +55,7 @@ require __DIR__ . '/../partials/header.php';
     </div>
   <?php endif; ?>
 
-  <form class="card form js-reserve-form" method="POST" action="<?= $BASE_URL ?>/reserve">
+  <form class="card form js-reserve-form" method="POST" action="/reserve">
     <div class="form-group">
       <label for="name">Full Name</label>
       <input class="input" id="name" name="name" required minlength="2" maxlength="60" placeholder="Your full name">
@@ -75,7 +75,7 @@ require __DIR__ . '/../partials/header.php';
 
     <div class="row space-between mt-lg">
       <button class="btn" type="submit">Confirm Reservation</button>
-      <a class="btn secondary" href="<?= $BASE_URL ?>/">Back to Events</a>
+      <a class="btn secondary" href="/">Back to Events</a>
     </div>
   </form>
 <?php endif; ?>

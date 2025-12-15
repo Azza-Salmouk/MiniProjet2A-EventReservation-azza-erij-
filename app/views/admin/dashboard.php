@@ -65,7 +65,7 @@ require __DIR__ . '/../partials/header.php';
                 <a class="btn secondary small" href="<?= $ADMIN_FORM_EVENT_URL ?>?id=<?= (int)$e['id'] ?>">Edit</a>
                 <a class="btn secondary small" href="<?= $ADMIN_RESERVATIONS_URL ?>?event_id=<?= (int)$e['id'] ?>">Reservations</a>
                 
-                <form class="delete-form" method="POST" action="<?= $BASE_URL ?>/admin/event/delete" style="margin: 0;">
+                <form class="delete-form" method="POST" action="/admin/event/delete" style="margin: 0;">
                   <input type="hidden" name="id" value="<?= (int)$e['id'] ?>">
                   <button class="btn danger small" type="submit">Delete</button>
                 </form>
