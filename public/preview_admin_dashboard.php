@@ -5,6 +5,13 @@
 $BASE_URL = "";
 $pageTitle = "Admin Dashboard";
 $isAdminPage = true;
+$layout = "admin";
+
+// URL overrides for preview
+$ADMIN_DASHBOARD_URL = "/preview_admin_dashboard.php";
+$ADMIN_RESERVATIONS_URL = "/preview_admin_reservations.php";
+$ADMIN_FORM_EVENT_URL = "/preview_admin_form_event.php";
+$ADMIN_LOGOUT_URL = "/preview_admin_login.php";
 
 // Mock data for events
 $events = [

@@ -14,8 +14,18 @@ if ($BASE_URL === '.' || $BASE_URL === '/') {
     $BASE_URL = '';
 }
 
+// URL fallbacks for flexible routing
+$EVENTS_LIST_URL = $EVENTS_LIST_URL ?? $BASE_URL . "/";
+$EVENT_DETAILS_URL = $EVENT_DETAILS_URL ?? $BASE_URL . "/events/details";
+$ADMIN_LOGIN_URL = $ADMIN_LOGIN_URL ?? $BASE_URL . "/admin/login";
+$ADMIN_DASHBOARD_URL = $ADMIN_DASHBOARD_URL ?? $BASE_URL . "/admin";
+$ADMIN_RESERVATIONS_URL = $ADMIN_RESERVATIONS_URL ?? $BASE_URL . "/admin/reservations";
+$ADMIN_FORM_EVENT_URL = $ADMIN_FORM_EVENT_URL ?? $BASE_URL . "/admin/events/new";
+$ADMIN_LOGOUT_URL = $ADMIN_LOGOUT_URL ?? $BASE_URL . "/admin/logout";
+
 $pageTitle = $pageTitle ?? "MiniEvent";
 $isAdminPage = $isAdminPage ?? false;
+$layout = $layout ?? "public"; // "public" or "admin"
 ?>
 <!doctype html>
 <html lang="fr">
@@ -31,14 +41,16 @@ $isAdminPage = $isAdminPage ?? false;
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
-      <a class="brand" href="<?= $BASE_URL ?>/">MiniEvent</a>
+      <a class="brand" href="<?= $EVENTS_LIST_URL ?>">MiniEvent</a>
       <nav class="nav">
-        <?php if ($isAdminPage): ?>
-          <a href="<?= $BASE_URL ?>/preview_admin_dashboard.php">Dashboard</a>
-          <a href="<?= $BASE_URL ?>/preview_admin_login.php" class="danger">Logout</a>
+        <?php if ($layout === "admin"): ?>
+          <a href="<?= $ADMIN_DASHBOARD_URL ?>">Dashboard</a>
+          <a href="<?= $ADMIN_RESERVATIONS_URL ?>">Reservations</a>
+          <a href="<?= $ADMIN_FORM_EVENT_URL ?>">New Event</a>
+          <a href="<?= $ADMIN_LOGOUT_URL ?>" class="danger">Logout</a>
         <?php else: ?>
-          <a href="<?= $BASE_URL ?>/preview_list.php">Events</a>
-          <a href="<?= $BASE_URL ?>/preview_admin_login.php">Admin</a>
+          <a href="<?= $EVENTS_LIST_URL ?>">Events</a>
+          <a href="<?= $ADMIN_LOGIN_URL ?>">Admin</a>
         <?php endif; ?>
       </nav>
     </div>
