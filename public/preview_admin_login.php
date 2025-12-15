@@ -12,6 +12,5 @@ $error = ""; // Set to a message to test error display
 $ADMIN_LOGIN_URL = "/preview_admin_login.php";
 $EVENTS_LIST_URL = "/preview_list.php";
 
-include __DIR__ . '/../app/views/partials/header.php';
+// Load the view directly
 include __DIR__ . '/../app/views/admin/login.php';
-include __DIR__ . '/../app/views/partials/footer.php';

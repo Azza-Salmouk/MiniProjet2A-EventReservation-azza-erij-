@@ -44,6 +44,5 @@ $events = [
     ]
 ];
 
-include __DIR__ . '/../app/views/partials/header.php';
+// Load the view directly
 include __DIR__ . '/../app/views/admin/dashboard.php';
-include __DIR__ . '/../app/views/partials/footer.php';

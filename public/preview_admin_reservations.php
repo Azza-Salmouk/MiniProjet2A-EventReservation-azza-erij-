@@ -50,6 +50,5 @@ $reservations = [
     ]
 ];
 
-include __DIR__ . '/../app/views/partials/header.php';
+// Load the view directly
 include __DIR__ . '/../app/views/admin/reservations.php';
-include __DIR__ . '/../app/views/partials/footer.php';

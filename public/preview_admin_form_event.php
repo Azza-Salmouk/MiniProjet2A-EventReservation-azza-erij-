@@ -14,6 +14,5 @@ $error = ""; // Set to a message to test error display
 $ADMIN_DASHBOARD_URL = "/preview_admin_dashboard.php";
 $ADMIN_FORM_EVENT_URL = "/preview_admin_form_event.php";
 
-include __DIR__ . '/../app/views/partials/header.php';
+// Load the view directly
 include __DIR__ . '/../app/views/admin/form_event.php';
-include __DIR__ . '/../app/views/partials/footer.php';

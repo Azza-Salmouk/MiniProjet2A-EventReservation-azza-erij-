@@ -15,5 +15,7 @@ $event = [
 
 $pageTitle = "Event Details";
 $isAdminPage = false;
+$layout = "public"; // Explicitly set layout for clarity
 
+// Load the view directly
 include __DIR__ . '/../app/views/events/details.php';

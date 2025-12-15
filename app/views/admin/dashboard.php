@@ -13,19 +13,19 @@ require __DIR__ . '/../partials/header.php';
 
 <!-- Stats Cards -->
 <div class="grid grid-cols-1 md:grid-cols-3 mb-xl">
-  <div class="admin-card text-center">
-    <h3 class="mt-0" style="font-size: 2.5rem; color: var(--primary);">12</h3>
-    <p class="text-muted">Total Events</p>
+  <div class="admin-card stats-card">
+    <div class="stat-number" style="color: var(--primary);">12</div>
+    <div class="stat-label">Total Events</div>
   </div>
   
-  <div class="admin-card text-center">
-    <h3 class="mt-0" style="font-size: 2.5rem; color: var(--secondary);">142</h3>
-    <p class="text-muted">Total Reservations</p>
+  <div class="admin-card stats-card">
+    <div class="stat-number" style="color: var(--secondary);">142</div>
+    <div class="stat-label">Total Reservations</div>
   </div>
   
-  <div class="admin-card text-center">
-    <h3 class="mt-0" style="font-size: 2.5rem; color: var(--accent);">867</h3>
-    <p class="text-muted">Seats Remaining</p>
+  <div class="admin-card stats-card">
+    <div class="stat-number" style="color: var(--accent);">867</div>
+    <div class="stat-label">Seats Remaining</div>
   </div>
 </div>
 
