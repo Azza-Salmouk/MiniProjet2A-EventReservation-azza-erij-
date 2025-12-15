@@ -240,6 +240,11 @@ a:hover {
   background-color: #dc2626;
 }
 
+.btn.small {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
 /* Cards */
 .card {
   background-color: var(--bg-card);
@@ -269,6 +274,20 @@ a:hover {
   object-fit: cover;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   margin-bottom: var(--spacing-md);
+}
+
+/* Admin Cards */
+.admin-card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  box-shadow: var(--shadow-lg);
 }
 
 /* Grid System */
@@ -308,6 +327,31 @@ a:hover {
 
 .badge.primary {
   background-color: var(--primary);
+  color: white;
+}
+
+.badge.success {
+  background-color: var(--success);
+  color: white;
+}
+
+.badge.warning {
+  background-color: var(--warning);
+  color: white;
+}
+
+.badge.danger {
+  background-color: var(--error);
+  color: white;
+}
+
+.badge.secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.badge.muted {
+  background-color: var(--text-muted);
   color: white;
 }
 
@@ -398,25 +442,43 @@ textarea.input {
   box-shadow: var(--shadow);
 }
 
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
 .table th,
-.table td {
+.table td,
+.admin-table th,
+.admin-table td {
   padding: var(--spacing-md);
   text-align: left;
   border-bottom: 1px solid var(--border);
 }
 
-.table th {
+.table th,
+.admin-table th {
   background-color: var(--bg-primary);
   font-weight: 600;
   color: var(--text-secondary);
 }
 
-.table tbody tr:nth-child(even) {
+.table tbody tr:nth-child(even),
+.admin-table tbody tr:nth-child(even) {
   background-color: var(--bg-primary);
 }
 
-.table tbody tr:hover {
+.table tbody tr:hover,
+.admin-table tbody tr:hover {
   background-color: #f3f4f6;
+}
+
+.table-responsive {
+  overflow-x: auto;
 }
 
 .row {

@@ -34,11 +34,11 @@ $isAdminPage = $isAdminPage ?? false;
       <a class="brand" href="<?= $BASE_URL ?>/">MiniEvent</a>
       <nav class="nav">
         <?php if ($isAdminPage): ?>
-          <a href="<?= $BASE_URL ?>/admin">Dashboard</a>
-          <a href="<?= $BASE_URL ?>/admin/logout" class="danger">Logout</a>
+          <a href="<?= $BASE_URL ?>/preview_admin_dashboard.php">Dashboard</a>
+          <a href="<?= $BASE_URL ?>/preview_admin_login.php" class="danger">Logout</a>
         <?php else: ?>
-          <a href="<?= $BASE_URL ?>/">Events</a>
-          <a href="<?= $BASE_URL ?>/admin/login">Admin</a>
+          <a href="<?= $BASE_URL ?>/preview_list.php">Events</a>
+          <a href="<?= $BASE_URL ?>/preview_admin_login.php">Admin</a>
         <?php endif; ?>
       </nav>
     </div>
