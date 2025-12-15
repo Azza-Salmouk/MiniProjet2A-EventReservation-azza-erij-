@@ -1,0 +1,41 @@
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Hover effects for cards and table rows */
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.2s ease-in-out;
+}
+
+.table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Fade-out animation for alerts */
+.alert.success.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Utility classes */
+.muted {
+  color: #666;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
