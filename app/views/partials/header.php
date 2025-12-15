@@ -10,24 +10,25 @@ $isAdminPage = $isAdminPage ?? false;
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= htmlspecialchars($pageTitle) ?></title>
-  <link rel="stylesheet" href="<?= $BASE_URL ?>/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= $BASE_URL ?>/css/style.css?v=1">
 </head>
 <body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="<?= $BASE_URL ?>/">MiniEvent</a>
+      <nav class="nav">
+        <?php if ($isAdminPage): ?>
+          <a href="<?= $BASE_URL ?>/admin">Dashboard</a>
+          <a href="<?= $BASE_URL ?>/admin/logout" class="danger">Logout</a>
+        <?php else: ?>
+          <a href="<?= $BASE_URL ?>/">Events</a>
+          <a href="<?= $BASE_URL ?>/admin/login">Admin</a>
+        <?php endif; ?>
+      </nav>
+    </div>
+  </header>
 
-<header class="topbar">
-  <div class="container topbar-inner">
-    <a class="brand" href="<?= $BASE_URL ?>/">MiniEvent</a>
-
-    <nav class="nav">
-      <?php if ($isAdminPage): ?>
-        <a href="<?= $BASE_URL ?>/admin">Dashboard</a>
-        <a href="<?= $BASE_URL ?>/admin/logout" class="danger">Logout</a>
-      <?php else: ?>
-        <a href="<?= $BASE_URL ?>/">Events</a>
-        <a href="<?= $BASE_URL ?>/admin/login">Admin</a>
-      <?php endif; ?>
-    </nav>
-  </div>
-</header>
-
-<main class="container">
+  <main class="container">
