@@ -49,6 +49,7 @@ $LOGO_URL = $isAdmin ? $ADMIN_DASHBOARD_URL : $EVENTS_LIST_URL;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= $BASE_URL ?>/css/style.css?v=<?= filemtime(__DIR__ . '/../../../public/css/style.css') ?>">
+  <link rel="stylesheet" href="<?= $BASE_URL ?>/assets/css/theme.css">
 </head>
 <body>
   <!-- Flash Messages -->
@@ -71,16 +72,22 @@ $LOGO_URL = $isAdmin ? $ADMIN_DASHBOARD_URL : $EVENTS_LIST_URL;
           <!-- Admin Navigation -->
           <a href="<?= $ADMIN_DASHBOARD_URL ?>" class="<?= $_SERVER['REQUEST_URI'] === '/admin' || $_SERVER['REQUEST_URI'] === '/admin/' ? 'active' : '' ?>">Dashboard</a>
           <a href="<?= $ADMIN_EVENTS_LIST_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], '/admin/events') !== false && $_SERVER['REQUEST_URI'] !== '/admin/events/new' ? 'active' : '' ?>">List Events</a>
-          <a href="<?= $ADMIN_FORM_EVENT_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], '/admin/events/new') !== false ? 'active' : '' ?>">New Event</a>
           <a href="<?= $ADMIN_RESERVATIONS_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'reservations') !== false ? 'active' : '' ?>">Reservations</a>
+          <button id="themeToggle" type="button" class="theme-toggle" aria-label="Toggle theme">
+            🌙
+          </button>
           <a href="<?= $ADMIN_LOGOUT_URL ?>" class="danger">Logout</a>
         <?php else: ?>
           <!-- Public Navigation -->
           <a href="<?= $EVENTS_LIST_URL ?>" class="<?= $currentPage === 'preview_list' || $currentPage === 'list' ? 'active' : '' ?>">Events</a>
           <a href="<?= $ADMIN_LOGIN_URL ?>" class="<?= strpos($_SERVER['REQUEST_URI'], 'login') !== false ? 'active' : '' ?>">Admin</a>
+          <button id="themeToggle" type="button" class="theme-toggle" aria-label="Toggle theme">
+            🌙
+          </button>
         <?php endif; ?>
       </nav>
     </div>
   </header>
 
   <main class="container">
+  <script src="<?= $BASE_URL ?>/assets/js/theme.js" defer></script>
