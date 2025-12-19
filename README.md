@@ -1,4 +1,5 @@
 # MiniProjet2A-EventReservation-azza-erij-
+
 "Projet de réservation d'événements – 2A GL-03"
 
 
@@ -326,3 +327,4 @@ Located in `public/css/style.css`:
 
 To view these previews, serve the project locally and navigate to the respective URLs.
 origin/features/views-ui
+
