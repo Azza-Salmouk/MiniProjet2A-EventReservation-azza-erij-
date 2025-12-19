@@ -239,12 +239,12 @@ Projet académique - ISSAT Sousse - 2A GL-03
 
 ## 📧 Contact
 
-- **Azza** (Backend) : [email]
-- **Erij** (Frontend) : [email]
+- **Azza** : [azzasalmouk20@gmail.com]
+- **Erij** : [erijbenamor6@gmail.com]
 
 ---
 
-**Statut** : Backend complété ✅ | Frontend en cours 🚧
+
 ## Frontend (Views/UI)
 
 Les vues frontend sont dans :
