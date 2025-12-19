@@ -9,12 +9,15 @@ class EventController {
     }
 
     public function show() {
-        if (!isset($_GET['id'])) {
+        // Support both ?id=1 and /event/1 formats
+        $id = $_GET['id'] ?? $_GET['event_id'] ?? null;
+        
+        if (!$id) {
             header("Location: /");
             exit;
         }
 
-        $event = Event::getById($_GET['id']);
+        $event = Event::getById($id);
         require ROOT . "/app/views/events/details.php";
     }
 

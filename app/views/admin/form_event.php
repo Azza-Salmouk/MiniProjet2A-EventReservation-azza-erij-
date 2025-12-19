@@ -4,9 +4,21 @@ $pageTitle = $isEdit ? "Edit Event" : "New Event";
 $isAdminPage = true;
 require __DIR__ . '/../partials/header.php';
 
-$action = $isEdit ? ($BASE_URL . "/admin/event/update") : ($BASE_URL . "/admin/event/create");
-?>
+// Use standardized routes
+if ($isEdit) {
+    $action = "/admin/events/" . (int)$event['id']; // POST to /admin/events/{id}
+} else {
+    $action = "/admin/events"; // POST to /admin/events
+}
 
+// Format date for datetime-local input (if editing)
+$formattedDate = '';
+if ($isEdit && !empty($event['event_date'])) {
+    // Convert MySQL datetime to datetime-local format (YYYY-MM-DDTHH:MM)
+    $dateTime = new DateTime($event['event_date']);
+    $formattedDate = $dateTime->format('Y-m-d\TH:i');
+}
+?>
 <h1 class="text-center"><?= $isEdit ? "Edit Event" : "Create New Event" ?></h1>
 
 <?php if (!empty($error)): ?>
@@ -19,7 +31,7 @@ $action = $isEdit ? ($BASE_URL . "/admin/event/update") : ($BASE_URL . "/admin/e
 <div class="admin-card">
   <form class="form" method="POST" action="<?= $action ?>" enctype="multipart/form-data">
     <?php if ($isEdit): ?>
-      <input type="hidden" name="id" value="<?= (int)$event['id'] ?>">
+      <!-- No hidden ID field needed since ID is in the URL -->
     <?php endif; ?>
 
     <div class="grid grid-cols-1 md:grid-cols-2" style="gap: var(--spacing-lg);">
@@ -42,9 +54,9 @@ $action = $isEdit ? ($BASE_URL . "/admin/event/update") : ($BASE_URL . "/admin/e
       <div class="form-group">
         <label for="event_date">
           Date & Time
-          <span class="helper-text">Format: YYYY-MM-DD HH:MM:SS</span>
+          <span class="helper-text">Select date and time</span>
         </label>
-        <input class="input" id="event_date" name="event_date" required value="<?= htmlspecialchars($event['event_date'] ?? '') ?>" placeholder="2024-01-01 10:00:00">
+        <input class="input" type="datetime-local" id="event_date" name="event_date" required value="<?= $formattedDate ?>">
       </div>
 
       <div class="form-group">
@@ -67,9 +79,9 @@ $action = $isEdit ? ($BASE_URL . "/admin/event/update") : ($BASE_URL . "/admin/e
     <div class="form-group mt-lg">
       <label for="image">
         Event Image (optional)
-        <span class="helper-text">Upload a representative image</span>
+        <span class="helper-text">Upload a representative image (JPG, PNG, GIF, WEBP, SVG)</span>
       </label>
-      <input class="input" type="file" id="image" name="image" accept="image/*">
+      <input class="input" type="file" id="image" name="image" accept="*/*">
       <?php if ($isEdit && !empty($event['image'])): ?>
         <small class="text-muted">Current image: <?= htmlspecialchars($event['image']) ?></small>
       <?php endif; ?>

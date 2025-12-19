@@ -7,6 +7,13 @@ class Event {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getRecent($limit = 3) {
+        $stmt = db()->prepare("SELECT * FROM events ORDER BY event_date DESC LIMIT ?");
+        $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getById($id) {
         $stmt = db()->prepare("SELECT * FROM events WHERE id = ?");
         $stmt->execute([$id]);

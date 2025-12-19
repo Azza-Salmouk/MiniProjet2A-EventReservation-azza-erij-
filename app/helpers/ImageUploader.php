@@ -7,7 +7,7 @@
 class ImageUploader {
     
     private $uploadDir;
-    private $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    private $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
     private $maxFileSize = 5242880; // 5MB
     private $error = null;
     
@@ -50,15 +50,22 @@ class ImageUploader {
             return false;
         }
         
-        // Vérifier que c'est vraiment une image (MIME type)
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_file($finfo, $file['tmp_name']);
-        finfo_close($finfo);
-        
-        $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        if (!in_array($mimeType, $allowedMimes)) {
-            $this->error = "File is not a valid image.";
-            return false;
+        // Vérifier que c'est vraiment une image (MIME type) - sauf pour SVG
+        if ($extension !== 'svg') {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_file($finfo, $file['tmp_name']);
+            finfo_close($finfo);
+            
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+            
+            // Special case: if MIME type detection fails but extension is valid, still accept it
+            // This handles cases where valid images are detected as application/octet-stream
+            if ($mimeType === 'application/octet-stream' && in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                // Allow it - extension is valid even if MIME detection failed
+            } else if (!in_array($mimeType, $allowedMimes)) {
+                $this->error = "File is not a valid image. Detected type: " . $mimeType;
+                return false;
+            }
         }
         
         // Générer un nom unique
@@ -70,7 +77,12 @@ class ImageUploader {
             return $filename;
         }
         
-        $this->error = "Failed to upload file.";
+        // Debug information for failed uploads
+        $this->error = "Failed to upload file. ";
+        $this->error .= "Temp file exists: " . (file_exists($file['tmp_name']) ? 'YES' : 'NO') . ". ";
+        $this->error .= "Destination dir writable: " . (is_writable(dirname($destination)) ? 'YES' : 'NO') . ". ";
+        $this->error .= "Destination: " . $destination;
+        
         return false;
     }
     

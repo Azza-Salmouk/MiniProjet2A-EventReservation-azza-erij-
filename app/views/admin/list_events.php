@@ -1,36 +1,22 @@
 <?php
-$pageTitle = "Admin Dashboard";
+$pageTitle = "List Events";
 $isAdminPage = true;
 require __DIR__ . '/../partials/header.php';
 ?>
-<h1 class="text-center">Dashboard Overview</h1>
+<h1 class="text-center">All Events</h1>
 
-<!-- Stats Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 mb-lg">
-  <div class="admin-card stats-card">
-    <div class="stat-number" style="color: var(--primary);"><?= $totalEvents ?></div>
-    <div class="stat-label">Total Events</div>
-  </div>
-  
-  <div class="admin-card stats-card">
-    <div class="stat-number" style="color: var(--secondary);"><?= $totalReservations ?></div>
-    <div class="stat-label">Total Reservations</div>
-  </div>
-  
-  <div class="admin-card stats-card">
-    <div class="stat-number" style="color: var(--accent);"><?= max(0, $seatsRemaining) ?></div>
-    <div class="stat-label">Seats Remaining</div>
-  </div>
+<div class="row mb-lg">
+  <a class="btn" href="<?= $ADMIN_FORM_EVENT_URL ?>">+ New Event</a>
 </div>
 
 <?php if (empty($events)): ?>
   <div class="admin-card text-center py-lg">
     <h3>No events yet</h3>
     <p class="text-muted">Create your first event to get started.</p>
+    <a href="<?= $ADMIN_FORM_EVENT_URL ?>" class="btn">Create Event</a>
   </div>
 <?php else: ?>
   <div class="admin-card">
-    <h2 class="mt-0 mb-lg">Recent Events</h2>
     <div class="table-responsive">
       <table class="admin-table">
         <thead>
@@ -64,5 +50,9 @@ require __DIR__ . '/../partials/header.php';
     </div>
   </div>
 <?php endif; ?>
+
+<div class="row mt-lg">
+  <a class="btn secondary" href="<?= $ADMIN_DASHBOARD_URL ?>">Back to Dashboard</a>
+</div>
 
 <?php require __DIR__ . '/../partials/footer.php'; ?>

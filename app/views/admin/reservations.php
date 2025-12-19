@@ -2,8 +2,15 @@
 $pageTitle = "Reservations";
 $isAdminPage = true;
 require __DIR__ . '/../partials/header.php';
-?>
 
+// Get parameters
+$event_id = $_GET['event_id'] ?? null;
+$searchTerm = $_GET['q'] ?? '';
+$page = max(1, intval($_GET['page'] ?? 1));
+$perPage = 10;
+$totalPages = $totalPages ?? 1;
+$totalCount = $totalCount ?? 0;
+?>
 <h1 class="text-center">Event Reservations</h1>
 
 <?php if (!empty($event)): ?>
@@ -13,22 +20,35 @@ require __DIR__ . '/../partials/header.php';
   </div>
 <?php endif; ?>
 
-<!-- Search and Pagination (visual only) -->
+<!-- Search and Pagination -->
 <div class="admin-card mb-lg">
   <div class="row space-between">
-    <div class="form-group" style="flex: 1; max-width: 300px;">
-      <input class="input" type="text" placeholder="Search reservations...">
+    <div style="flex: 1; max-width: 300px;">
+      <form method="GET" action="<?= $ADMIN_RESERVATIONS_URL ?>">
+        <input type="hidden" name="event_id" value="<?= htmlspecialchars($event_id) ?>">
+        <div class="form-group">
+          <input class="search-input" type="text" name="q" placeholder="Search reservations..." value="<?= htmlspecialchars($searchTerm) ?>">
+        </div>
+      </form>
     </div>
+    <?php if (!empty($event)): ?>
     <div>
-      <span class="badge">Page 1 of 3</span>
+      <span class="badge">Page <?= $page ?> of <?= max(1, $totalPages) ?></span>
     </div>
+    <?php endif; ?>
   </div>
 </div>
 
 <?php if (empty($reservations)): ?>
   <div class="admin-card text-center py-lg">
     <h3>No reservations yet</h3>
-    <p class="text-muted">No one has reserved a seat for this event.</p>
+    <p class="text-muted">
+      <?php if (!empty($event)): ?>
+        No one has reserved a seat for this event.
+      <?php else: ?>
+        No reservations found.
+      <?php endif; ?>
+    </p>
     <a href="<?= $ADMIN_DASHBOARD_URL ?>" class="btn">Back to Dashboard</a>
   </div>
 <?php else: ?>
@@ -37,29 +57,25 @@ require __DIR__ . '/../partials/header.php';
       <table class="admin-table">
         <thead>
           <tr>
+            <?php if (empty($event)): ?>
+              <th>Event</th>
+            <?php endif; ?>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
             <th>Reserved On</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($reservations as $r): ?>
             <tr>
+              <?php if (empty($event)): ?>
+                <td><?= htmlspecialchars($r['event_title'] ?? 'Unknown Event') ?></td>
+              <?php endif; ?>
               <td><?= htmlspecialchars($r['name'] ?? '') ?></td>
               <td><?= htmlspecialchars($r['email'] ?? '') ?></td>
               <td><?= htmlspecialchars($r['phone'] ?? '') ?></td>
               <td><?= !empty($r['created_at']) ? date('d/m/Y H:i', strtotime($r['created_at'])) : '' ?></td>
-              <td>
-                <?php if (($r['status'] ?? '') === 'CONFIRMED'): ?>
-                  <span class="badge success">CONFIRMED</span>
-                <?php elseif (($r['status'] ?? '') === 'PENDING'): ?>
-                  <span class="badge warning">PENDING</span>
-                <?php else: ?>
-                  <span class="badge muted">UNKNOWN</span>
-                <?php endif; ?>
-              </td>
             </tr>
           <?php endforeach; ?>
         </tbody>
@@ -67,18 +83,34 @@ require __DIR__ . '/../partials/header.php';
     </div>
   </div>
   
-  <!-- Pagination (visual only) -->
+  <?php if (!empty($event)): ?>
+  <!-- Pagination -->
   <div class="admin-card mt-lg">
     <div class="row space-between">
-      <button class="btn secondary small">Previous</button>
+      <?php if ($page > 1): ?>
+        <a class="btn secondary small" href="<?= $ADMIN_RESERVATIONS_URL ?>?event_id=<?= urlencode($event_id) ?>&q=<?= urlencode($searchTerm) ?>&page=<?= $page - 1 ?>">Previous</a>
+      <?php else: ?>
+        <button class="btn secondary small" disabled>Previous</button>
+      <?php endif; ?>
+      
       <div>
-        <span class="badge">1</span>
-        <span class="badge secondary">2</span>
-        <span class="badge secondary">3</span>
+        <?php for ($i = max(1, $page - 2); $i <= min($totalPages, $page + 2); $i++): ?>
+          <?php if ($i == $page): ?>
+            <span class="badge"><?= $i ?></span>
+          <?php else: ?>
+            <a class="badge secondary" href="<?= $ADMIN_RESERVATIONS_URL ?>?event_id=<?= urlencode($event_id) ?>&q=<?= urlencode($searchTerm) ?>&page=<?= $i ?>"><?= $i ?></a>
+          <?php endif; ?>
+        <?php endfor; ?>
       </div>
-      <button class="btn secondary small">Next</button>
+      
+      <?php if ($page < $totalPages): ?>
+        <a class="btn secondary small" href="<?= $ADMIN_RESERVATIONS_URL ?>?event_id=<?= urlencode($event_id) ?>&q=<?= urlencode($searchTerm) ?>&page=<?= $page + 1 ?>">Next</a>
+      <?php else: ?>
+        <button class="btn secondary small" disabled>Next</button>
+      <?php endif; ?>
     </div>
   </div>
+  <?php endif; ?>
 <?php endif; ?>
 
 <div class="row mt-lg">

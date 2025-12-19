@@ -15,3 +15,11 @@ require_once ROOT . '/config/database.php';
 require_once ROOT . '/app/helpers/Validator.php';
 require_once ROOT . '/app/helpers/ImageUploader.php';
 require_once ROOT . '/app/helpers/Flash.php';
+
+// Fonction helper pour la protection admin
+function requireAdmin() {
+    if (empty($_SESSION['admin_id'])) {
+        header("Location: /admin/login");
+        exit;
+    }
+}

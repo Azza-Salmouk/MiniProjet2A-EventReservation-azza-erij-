@@ -68,4 +68,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Handle search functionality in reservations
+    const searchInput = document.querySelector('#reservationSearch');
+    if (searchInput) {
+        // Get the current URL and parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('event_id');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.trim();
+            
+            // Update URL with search term (without page reload)
+            const newUrl = new URL(window.location);
+            if (searchTerm) {
+                newUrl.searchParams.set('search', searchTerm);
+            } else {
+                newUrl.searchParams.delete('search');
+            }
+            
+            // Use history.pushState to update URL without reload
+            window.history.replaceState({}, '', newUrl);
+            
+            // If we have an event_id, redirect to include search term
+            if (eventId) {
+                const baseUrl = window.location.pathname;
+                const newUrlWithSearch = `${baseUrl}?event_id=${eventId}&search=${encodeURIComponent(searchTerm)}`;
+                window.location.href = newUrlWithSearch;
+            } else {
+                // For all reservations page, we would need a different approach
+                // For now, we'll just show a message that search is working
+                console.log('Search term:', searchTerm);
+            }
+        });
+    }
 });

@@ -1,9 +1,14 @@
 <?php
+// Redirect admins to dashboard automatically
+if (!empty($_SESSION['admin_id'])) {
+    header("Location: /admin");
+    exit;
+}
+
 $pageTitle = "Events";
 $isAdminPage = false;
 require __DIR__ . '/../partials/header.php';
 ?>
-
 <!-- Hero Section -->
 <section class="hero">
   <div class="hero-content">
@@ -50,7 +55,7 @@ require __DIR__ . '/../partials/header.php';
           
           <p class="text-muted small mb-lg"><?= htmlspecialchars(substr($e['description'] ?? '', 0, 100)) ?><?= strlen($e['description'] ?? '') > 100 ? '...' : '' ?></p>
           
-          <a href="<?= $BASE_URL ?>/event/<?= (int)$e['id'] ?>" class="btn secondary">View Details</a>
+          <a href="<?= $BASE_URL ?>/event?id=<?= (int)$e['id'] ?>" class="btn secondary">View Details</a>
         </div>
       <?php endforeach; ?>
     </div>
